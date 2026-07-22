@@ -193,69 +193,44 @@
             <div class="resume-panel" id="tab-skills">
                 <div class="skills-grid">
                     <div class="skill-group">
-                        <h3>Design Skills</h3>
+                        <h3>Infrastructure &amp; Networking</h3>
                         <div class="skill-bar">
-                            <div class="skill-bar-header"><span>Photoshop</span><span class="pct">95%</span></div>
+                            <div class="skill-bar-header"><span>Networking</span><span class="pct level-intermediate">Intermediate</span></div>
                             <div class="skill-track">
-                                <div class="skill-fill" style="width:95%"></div>
+                                <div class="skill-fill" style="width:60%"></div>
                             </div>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-bar-header"><span>Figma</span><span class="pct">80%</span></div>
+                            <div class="skill-bar-header"><span>Cloud Computing</span><span class="pct level-intermediate">Intermediate</span></div>
                             <div class="skill-track">
-                                <div class="skill-fill" style="width:80%"></div>
+                                <div class="skill-fill" style="width:60%"></div>
                             </div>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-bar-header"><span>Canva</span><span class="pct">95%</span></div>
+                            <div class="skill-bar-header"><span>Linux</span><span class="pct level-intermediate">Intermediate</span></div>
                             <div class="skill-track">
-                                <div class="skill-fill" style="width:95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header"><span>Adobe Illustrator</span><span class="pct">70%</span>
-                            </div>
-                            <div class="skill-track">
-                                <div class="skill-fill" style="width:70%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header"><span>Design</span><span class="pct">90%</span></div>
-                            <div class="skill-track">
-                                <div class="skill-fill" style="width:90%"></div>
+                                <div class="skill-fill" style="width:60%"></div>
                             </div>
                         </div>
                     </div>
                     <div class="skill-group">
-                        <h3>Development Skills</h3>
+                        <h3>Development &amp; DevOps</h3>
                         <div class="skill-bar">
-                            <div class="skill-bar-header"><span>HTML</span><span class="pct">85%</span></div>
+                            <div class="skill-bar-header"><span>Docker</span><span class="pct level-beginner">Beginner</span></div>
                             <div class="skill-track">
-                                <div class="skill-fill" style="width:85%"></div>
+                                <div class="skill-fill" style="width:35%"></div>
                             </div>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-bar-header"><span>JavaScript</span><span class="pct">80%</span></div>
+                            <div class="skill-bar-header"><span>Python</span><span class="pct level-beginner">Beginner</span></div>
                             <div class="skill-track">
-                                <div class="skill-fill" style="width:80%"></div>
+                                <div class="skill-fill" style="width:35%"></div>
                             </div>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-bar-header"><span>Networking</span><span class="pct">90%</span></div>
+                            <div class="skill-bar-header"><span>Kubernetes</span><span class="pct level-beginner">Beginner</span></div>
                             <div class="skill-track">
-                                <div class="skill-fill" style="width:90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header"><span>Cloud Computing</span><span class="pct">80%</span></div>
-                            <div class="skill-track">
-                                <div class="skill-fill" style="width:80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header"><span>MS. Office</span><span class="pct">70%</span></div>
-                            <div class="skill-track">
-                                <div class="skill-fill" style="width:70%"></div>
+                                <div class="skill-fill" style="width:35%"></div>
                             </div>
                         </div>
                     </div>
@@ -683,38 +658,29 @@ Subang</div>
                 isOpen = false;
             }
 
-            // Detect touch device (no hover capability)
-            var isTouchDevice = window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches;
-
-            if (isTouchDevice) {
-                // Attach tap handlers to all project and certificate thumbnail images
-                document.querySelectorAll('.project-thumb img, .cert-thumb img').forEach(function (img) {
-                    img.style.cursor = 'zoom-in';
-                    img.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        openLightbox(this.src, this.alt);
-                    });
+            // Attach click handlers to all project and certificate thumbnail images for desktop and mobile
+            document.querySelectorAll('.project-thumb img, .cert-thumb img').forEach(function (img) {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openLightbox(this.src, this.alt);
                 });
-            }
+            });
 
-            // Close on clicking the close button
-            closeBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
+            // Close on clicking ANYWHERE (close button, overlay, or image)
+            overlay.addEventListener('click', function () {
                 closeLightbox();
-                // Pop the history state we pushed
                 if (history.state && history.state.lightbox) {
                     history.back();
                 }
             });
 
-            // Close on clicking the overlay background (outside the image)
-            overlay.addEventListener('click', function (e) {
-                if (e.target === overlay) {
-                    closeLightbox();
-                    if (history.state && history.state.lightbox) {
-                        history.back();
-                    }
+            closeBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                closeLightbox();
+                if (history.state && history.state.lightbox) {
+                    history.back();
                 }
             });
 
@@ -729,7 +695,7 @@ Subang</div>
             });
 
             // Close on browser back button
-            window.addEventListener('popstate', function (e) {
+            window.addEventListener('popstate', function () {
                 if (isOpen) {
                     closeLightbox();
                 }

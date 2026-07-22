@@ -787,28 +787,46 @@ img {
 }
 
 .skill-bar {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .skill-bar-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 6px;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .skill-bar-header span {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-body);
 }
 
 .skill-bar-header .pct {
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 3px 14px;
+  border-radius: 100px;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+}
+
+.skill-bar-header .pct.level-intermediate {
   color: var(--accent);
+  background: rgba(232, 76, 30, 0.08);
+  border: 1.5px solid rgba(232, 76, 30, 0.35);
+}
+
+.skill-bar-header .pct.level-beginner {
+  color: var(--text-muted);
+  background: rgba(154, 90, 64, 0.06);
+  border: 1.5px solid rgba(154, 90, 64, 0.25);
 }
 
 .skill-track {
   height: 8px;
-  background: rgba(232, 76, 30, 0.15);
+  background: rgba(232, 76, 30, 0.08);
   border-radius: 100px;
   overflow: hidden;
 }
@@ -916,17 +934,13 @@ img {
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-@media (hover: hover) and (min-width: 1025px) {
-  .project-thumb:hover {
-    overflow: visible;
-    z-index: 100;
-  }
+.project-thumb img {
+  cursor: zoom-in;
+}
 
+@media (hover: hover) {
   .project-thumb:hover img {
-    transform: scale(2.2);
-    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.5));
-    position: relative;
-    z-index: 100;
+    transform: scale(1.5);
   }
 }
 
@@ -1011,17 +1025,13 @@ img {
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-@media (hover: hover) and (min-width: 1025px) {
-  .cert-thumb:hover {
-    overflow: visible;
-    z-index: 100;
-  }
+.cert-thumb img {
+  cursor: zoom-in;
+}
 
+@media (hover: hover) {
   .cert-thumb:hover img {
-    transform: scale(2.4);
-    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.5));
-    position: relative;
-    z-index: 100;
+    transform: scale(1.55);
   }
 }
 
