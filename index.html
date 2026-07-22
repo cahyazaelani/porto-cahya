@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -46,13 +46,16 @@
                     <h1>Hi, I'm <span class="accent">Cahya Zaelani</span></h1>
                     <p class="hero-desc">Telecommunication Systems student with hands-on experience in cloud computing, networking, and algorithm-driven system deployment. Developed SDN controllers using swarm optimization techniques and implemented multi-cloud failover mechanisms to ensure high availability across cloud environments. Experienced in containerizing and deploying applications with Docker and Kubernetes. Passionate about distributed systems and building scalable, resilient infrastructure.</p>
                     <div class="hero-actions">
-                        <a href="#contact" class="btn-primary">
+                        <a href="https://drive.google.com/drive/folders/10-9BdxjgUAZ2_DTLOFZ4iu14rbTX7orG?usp=sharing" target="_blank" class="btn-primary">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                <polyline points="22,6 12,13 2,6" />
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                                <polyline points="10 9 9 9 8 9" />
                             </svg>
-                            Contact Me
+                            CV & Portfolio
                         </a>
                         <a href="https://www.linkedin.com/in/cahya-zaelani-8a130a24b/" target="_blank"
                             class="btn-outline">
@@ -589,6 +592,12 @@ Subang</div>
         </svg>
     </button>
 
+    <!-- === IMAGE LIGHTBOX OVERLAY === -->
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close preview">&times;</button>
+        <img id="lightboxImg" src="" alt="Preview">
+    </div>
+
     <!-- === JAVASCRIPT === -->
     <script>
         /* --- Mobile Menu --- */
@@ -649,6 +658,83 @@ Subang</div>
             el.classList.add('reveal');
             observer.observe(el);
         });
+
+        /* --- Image Lightbox for Mobile/Touch --- */
+        (function () {
+            var overlay = document.getElementById('lightboxOverlay');
+            var lightboxImg = document.getElementById('lightboxImg');
+            var closeBtn = document.getElementById('lightboxClose');
+            var isOpen = false;
+
+            function openLightbox(src, alt) {
+                lightboxImg.src = src;
+                lightboxImg.alt = alt || 'Preview';
+                overlay.classList.add('active');
+                document.body.classList.add('lightbox-open');
+                isOpen = true;
+                // Push a history state so the back button can close the lightbox
+                history.pushState({ lightbox: true }, '');
+            }
+
+            function closeLightbox() {
+                if (!isOpen) return;
+                overlay.classList.remove('active');
+                document.body.classList.remove('lightbox-open');
+                isOpen = false;
+            }
+
+            // Detect touch device (no hover capability)
+            var isTouchDevice = window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches;
+
+            if (isTouchDevice) {
+                // Attach tap handlers to all project and certificate thumbnail images
+                document.querySelectorAll('.project-thumb img, .cert-thumb img').forEach(function (img) {
+                    img.style.cursor = 'zoom-in';
+                    img.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openLightbox(this.src, this.alt);
+                    });
+                });
+            }
+
+            // Close on clicking the close button
+            closeBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                closeLightbox();
+                // Pop the history state we pushed
+                if (history.state && history.state.lightbox) {
+                    history.back();
+                }
+            });
+
+            // Close on clicking the overlay background (outside the image)
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) {
+                    closeLightbox();
+                    if (history.state && history.state.lightbox) {
+                        history.back();
+                    }
+                }
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && isOpen) {
+                    closeLightbox();
+                    if (history.state && history.state.lightbox) {
+                        history.back();
+                    }
+                }
+            });
+
+            // Close on browser back button
+            window.addEventListener('popstate', function (e) {
+                if (isOpen) {
+                    closeLightbox();
+                }
+            });
+        })();
     </script>
 </body>
 
